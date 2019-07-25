@@ -11,36 +11,72 @@
     <script>
       // Go through todo.md before start solving.
       function countAllPeople() {
-        // your code goes here
-        console.log(got);
+        got.houses.reduce((acc, curr) => {
+        acc = acc + curr.people.length
+        return acc;
+      }, 0)
       }
 
       function peopleByHouses() {
-        // your code goes here
+
       }
 
       function everyone() {
-        // your code goes here
+        got.houses.reduce((acc, curr) => {
+        acc = acc.concat(curr.name)
+        return acc;
+      }, [])
       }
 
       function nameWithS() {
-        // your code goes here
+        got.houses.reduce((acc, curr) => {
+        acc = acc.concat(curr.name).filter(peopleName => peopleName.includes("s") || peopleName.includes("S"));
+        return acc;
+      }, [])
       }
 
       function nameWithA() {
-        // your code goes here
+        got.houses.reduce((acc, curr) => {
+        acc = acc.concat(curr.name).filter(peopleName => peopleName.includes("a") || peopleName.includes("A"));
+        return acc;
+      }, [])
       }
 
       function surnameWithS() {
-        // your code goes here
+        let allPeople = everyone();
+        let surname = [];
+        for (let i = 0; i < allPeople.length; i++) {
+          if (allPeople[i].split(' ')[1][0] == 's' || allPeople[i].split(' ')[1][0] == 'S') {
+            surname.push( allPeople[i] );
+          }
+        }
+        return surname;
       }
 
       function surnameWithA() {
         // your code goes here
+        let allPeople = everyone();
+        let surname = [];
+        for (let i = 0; i < allPeople.length; i++) {
+          if (allPeople[i].split(' ')[1][0] == 'A' || allPeople[i].split(' ')[1][0] == 'A') {
+            surname.push( allPeople[i] );
+          }
+        }
+        return surname;
       }
 
       function peopleNameOfAllHouses() {
         // your code goes here
+        let res = {};
+        let people = [];
+        for (let i = 0; i < got.houses.length; i++) {
+          people = [];
+          for (let j = 0; j < got.houses[i].people.length; j++) {
+            people.push(got.houses[i].people[j].name);
+          }
+          res[got.houses[i].name] = people;
+        }
+        return res;
       }
 
       // Testing your result after writing your function
@@ -50,6 +86,7 @@
       console.log(peopleByHouses());
       // Output should be
       //{Arryns: 1, Baratheons: 6, Dothrakis: 1, Freys: 1, Greyjoys: 3, Lannisters: 4,Redwyne: 1,Starks: 8,Targaryens: 2,Tullys: 4,Tyrells: 2}
+      
 
       console.log(everyone());
       // Output should be
